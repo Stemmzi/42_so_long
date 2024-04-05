@@ -6,12 +6,15 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:35 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/02 21:34:01 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/05 16:44:16 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+# define TILESIZE 16
+# define SCALE 4
 
 # include "libft/libft.h"
 # include "MLX42/MLX42.h"

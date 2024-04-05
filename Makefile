@@ -4,7 +4,7 @@ LIBMLX	:= ./MLX42
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBMLXA = $(LIBMLX)/build/libmlx42.a
-SRCS	:= main.c map_creator.c build_objects.c key_hook.c
+SRCS	:= main.c map_creator.c build_objects.c key_hook.c free.c
 OBJS	:= ${SRCS:.c=.o}
 TSRCS = test.c
 LIBFT = libft.a
@@ -25,6 +25,9 @@ $(LIBFT):
 
 test: libmlx test.o
 	@$(CC) $(CFLAGS) $(LIBS) $(HEADERS) test.o -o $(NAME)
+
+norm:
+	norminette $(SRCS)
 
 clean:
 	rm -rf $(OBJS)
