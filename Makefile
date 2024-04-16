@@ -1,10 +1,10 @@
 NAME	:= game
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror #-g -fsanitize=address #-Wunreachable-code -Ofast
 LIBMLX	:= ./MLX42
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBMLXA = $(LIBMLX)/build/libmlx42.a
-SRCS	:= main.c map_creator.c build_objects.c key_hook.c free.c
+SRCS	:= main.c map_creator.c build_objects.c key_hook.c free.c map_checker.c game_logic.c
 OBJS	:= ${SRCS:.c=.o}
 TSRCS = test.c
 LIBFT = libft.a

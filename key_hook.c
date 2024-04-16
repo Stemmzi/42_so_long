@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:40:08 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/05 16:48:10 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/17 00:28:14 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,38 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
-		puts("Hello ");
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		exit(EXIT_SUCCESS);
+	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS
+			|| keydata.action == MLX_REPEAT))
+		move_player(game, 0, -1);
+	if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS
+			|| keydata.action == MLX_REPEAT))
+		move_player(game, -1, 0);
+	if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS
+			|| keydata.action == MLX_REPEAT))
+		move_player(game, 0, 1);
+	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS
+			|| keydata.action == MLX_REPEAT))
+		move_player(game, 1, 0);
+}
+
+void	move_player(t_game *game, int x, int y)
+{
+	int	size;
+
+	size = TILESIZE * SCALE;
+	if (!is_wall(game, game->player.x + x, game->player.y + y))
 	{
-		game->img->instances[0].x += 0;
-		game->img->instances[0].y += -64;
+		game->player.skin->instances[0].y += y * TILESIZE * SCALE;
+		game->player.y += y;
+		game->player.skin->instances[0].x += x * TILESIZE * SCALE;
+		game->player.x += x;
+		game->player.moves += 1;
+		ft_printf("%d\n", game->player.moves);
 	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-	{
-		game->img->instances[0].x += -64;
-		game->img->instances[0].y += 0;
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-	{
-		game->img->instances[0].x += 0;
-		game->img->instances[0].y += 64;
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-	{
-		game->img->instances[0].x += 64;
-		game->img->instances[0].y += 0;
-	}
+	if (game->map.grid[game->player.y][game->player.x] == 'C')
+		collect(game, game->player.x, game->player.y);
+	if (game->map.grid[game->player.y][game->player.x] == 'E')
+		is_exit(game);
 }
