@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 00:22:33 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/17 00:23:08 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/18 18:24:06 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ void	collect(t_game *game, int x, int y)
 void	is_exit(t_game *game)
 {
 	if (game->exit_o->count > 0)
-		exit(EXIT_SUCCESS);
+		mlx_close_window(game->mlx);
 }

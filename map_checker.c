@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:30 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/10 17:15:14 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/18 17:13:26 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,8 @@ int	is_playable(t_game *game)
 
 void	check_map(t_game *game)
 {
-	if (!is_rectangle(game))
-	{
-		free_map(game->map.grid);
-		exit(EXIT_FAILURE);
-	}
-	if (!is_surrounded_by_walls(game))
-	{
-		free_map(game->map.grid);
-		exit(EXIT_FAILURE);
-	}
-	if (!is_playable(game))
+	if ((!is_rectangle(game)) || (!is_surrounded_by_walls(game))
+		|| (!is_playable(game)))
 	{
 		free_map(game->map.grid);
 		exit(EXIT_FAILURE);

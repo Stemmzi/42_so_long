@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:35 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/17 00:25:30 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/18 18:09:13 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void	load_textures(t_game *game);
 int		build_map(t_game *game);
 void	build_tile(t_game *game, char c, int x, int y);
 
+void	init_imgs(t_game *game);
+void	create_img(t_game *game, char *p, mlx_texture_t **t, mlx_image_t **img);
+
 void	check_map(t_game *game);
 int		is_rectangle(t_game *game);
 int		is_surrounded_by_walls(t_game *game);
@@ -79,5 +82,6 @@ int		find_instance(t_game *game, int x, int y);
 void	is_exit(t_game *game);
 
 void	free_map(char **map);
-
+void	ft_error(void);
+void 	ft_mlx_error(void);
 #endif

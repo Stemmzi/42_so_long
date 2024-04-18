@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:40:08 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/17 00:28:14 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/17 01:05:42 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		exit(EXIT_SUCCESS);
+		mlx_close_window(game->mlx);
 	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS
 			|| keydata.action == MLX_REPEAT))
 		move_player(game, 0, -1);
