@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:35 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/21 20:40:13 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/21 21:27:01 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,12 @@ typedef struct s_game
 
 void	init_map(t_game *game, char *argv[]);
 void	load_map(t_game *game, char **argv);
-void	load_textures(t_game *game);
 void	build_map(t_game *game);
-void	build_tile(t_game *game, char c, int x, int y);
-void	ft_mlx_image_to_window(t_game *game, mlx_image_t *img, int x, int y);
 
+void	load_textures(t_game *game);
 void	init_imgs(t_game *game);
 void	create_img(t_game *game, char *p, mlx_texture_t **t, mlx_image_t **img);
+void	ft_mlx_image_to_window(t_game *game, mlx_image_t *img, int x, int y);
 
 void	check_map(t_game *game);
 int		is_rectangle(t_game *game);

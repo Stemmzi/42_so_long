@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:54:45 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/21 20:49:03 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/21 21:28:03 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,7 @@ void	load_map(t_game *game, char **argv)
 	close(fd);
 }
 
-void	ft_mlx_image_to_window(t_game *game, mlx_image_t *img, int x, int y)
-{
-	if (mlx_image_to_window(game->mlx, img, x, y) < 0)
-		clean_exit(game);
-}
-
-void	build_tile(t_game *game, char c, int x, int y)
+static void	build_tile(t_game *game, char c, int x, int y)
 {
 	int			size;
 

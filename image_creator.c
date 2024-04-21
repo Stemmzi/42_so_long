@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:40:55 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/21 20:22:44 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/21 21:35:34 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,11 @@ void	create_img(t_game *game, char *p, mlx_texture_t **t, mlx_image_t **img)
 		clean_exit(game);
 	*img = mlx_texture_to_image(game->mlx, *t);
 	if (!mlx_resize_image(*img, size, size))
+		clean_exit(game);
+}
+
+void	ft_mlx_image_to_window(t_game *game, mlx_image_t *img, int x, int y)
+{
+	if (mlx_image_to_window(game->mlx, img, x, y) < 0)
 		clean_exit(game);
 }

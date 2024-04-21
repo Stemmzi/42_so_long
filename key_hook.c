@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:40:08 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/17 01:05:42 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/21 21:30:13 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	move_player(t_game *game, int x, int y)
 	size = TILESIZE * SCALE;
 	if (!is_wall(game, game->player.x + x, game->player.y + y))
 	{
-		game->player.skin->instances[0].y += y * TILESIZE * SCALE;
+		game->player.skin->instances[0].y += y * size;
 		game->player.y += y;
-		game->player.skin->instances[0].x += x * TILESIZE * SCALE;
+		game->player.skin->instances[0].x += x * size;
 		game->player.x += x;
 		game->player.moves += 1;
 		ft_printf("%d\n", game->player.moves);
