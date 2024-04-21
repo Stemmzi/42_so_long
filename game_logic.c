@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 00:22:33 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/18 18:24:06 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/21 20:39:28 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_wall(t_game *game, int x, int y)
 	return (0);
 }
 
-int	find_instance(t_game *game, int x, int y)
+static int	find_instance(t_game *game, int x, int y)
 {
 	int	count;
 	int	size;
@@ -35,10 +35,8 @@ int	find_instance(t_game *game, int x, int y)
 void	collect(t_game *game, int x, int y)
 {
 	int	count;
-	int	size;
 
 	count = find_instance(game, x, y);
-	size = TILESIZE * SCALE;
 	if (game->collect->instances[count].enabled == true)
 	{
 		game->collect->instances[count].enabled = false;
@@ -47,7 +45,7 @@ void	collect(t_game *game, int x, int y)
 	if (game->collect_count == 0 && game->exit_o->count < 1)
 	{
 		game->exit_c->instances[0].enabled = false;
-		mlx_image_to_window(game->mlx, game->exit_o,
+		ft_mlx_image_to_window(game, game->exit_o,
 			game->exit_c->instances[0].x, game->exit_c->instances[0].y);
 	}
 }

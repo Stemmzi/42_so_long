@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:30 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/18 17:13:26 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/21 19:50:21 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	is_rectangle(t_game *game)
 
 	len = game->map.length;
 	y = 0;
+	game->my_error = "Error: Map is not rectangular\n";
 	while (y < game->map.height)
 	{
 		if (len != ft_strlen(game->map.grid[y]))
@@ -35,6 +36,7 @@ int	is_surrounded_by_walls(t_game *game)
 
 	x = 0;
 	y = 0;
+	game->my_error = "Error: Map is not surrounded by Walls\n";
 	while (y < game->map.height)
 	{
 		if (y == 0 || y == game->map.height)
@@ -46,12 +48,9 @@ int	is_surrounded_by_walls(t_game *game)
 				x++;
 			}
 		}
-		else
-		{
-			if (game->map.grid[y][0] != '1' ||
-				game->map.grid[y][game->map.length - 1] != '1')
-				return (0);
-		}
+		else if (game->map.grid[y][0] != '1' ||
+			game->map.grid[y][game->map.length - 1] != '1')
+			return (0);
 		y++;
 	}
 	return (1);
@@ -73,7 +72,6 @@ static int	has_element(char c)
 	{
 		if (flag_player == 1 && flag_exit == 1 && flag_collect > 0)
 			return (1);
-		return (0);
 	}
 	return (0);
 }
@@ -85,6 +83,7 @@ int	is_playable(t_game *game)
 
 	x = 0;
 	y = 0;
+	game->my_error = "Error: Map is not playable\n";
 	while (y < game->map.height)
 	{
 		while (x < game->map.length)
@@ -109,8 +108,6 @@ void	check_map(t_game *game)
 {
 	if ((!is_rectangle(game)) || (!is_surrounded_by_walls(game))
 		|| (!is_playable(game)))
-	{
-		free_map(game->map.grid);
-		exit(EXIT_FAILURE);
-	}
+		clean_exit(game);
+	game->my_error = NULL;
 }

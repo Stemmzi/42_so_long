@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:40:55 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/18 18:10:04 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/21 20:22:44 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	init_imgs(t_game *game)
 
 void	create_img(t_game *game, char *p, mlx_texture_t **t, mlx_image_t **img)
 {
-	uint32_t	size;
+	int	size;
 
 	size = TILESIZE * SCALE;
 	*t = mlx_load_png(p);
 	if (!t)
-		ft_mlx_error();
+		clean_exit(game);
 	*img = mlx_texture_to_image(game->mlx, *t);
 	if (!mlx_resize_image(*img, size, size))
-		ft_mlx_error();
+		clean_exit(game);
 }
