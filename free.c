@@ -6,11 +6,27 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:33:53 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/21 20:56:11 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/22 01:20:49 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_textures(t_textures tex)
+{
+	if (tex.path)
+		mlx_delete_texture(tex.path);
+	if (tex.wall)
+		mlx_delete_texture(tex.wall);
+	if (tex.collect)
+		mlx_delete_texture(tex.collect);
+	if (tex.exit_c)
+		mlx_delete_texture(tex.exit_c);
+	if (tex.exit_o)
+		mlx_delete_texture(tex.exit_o);
+	if (tex.player)
+		mlx_delete_texture(tex.player);
+}
 
 void	free_map(char **map)
 {
@@ -43,6 +59,7 @@ void	ft_mlx_error(void)
 
 void	clean_exit(t_game *game)
 {
+	free_textures(game->textures);
 	if (game->mlx)
 		mlx_terminate(game->mlx);
 	if (game->map.grid)

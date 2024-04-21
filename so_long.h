@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:35 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/21 21:27:01 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/22 00:41:38 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	is_exit(t_game *game);
 
 void	clean_exit(t_game *game);
 void	free_map(char **map);
+void	free_textures(t_textures tex);
 void	ft_mlx_error(void);
 void	ft_error(void);
 #endif
