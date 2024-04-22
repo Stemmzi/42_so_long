@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:35 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/22 00:41:38 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/22 17:51:54 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@
 # include "MLX42/MLX42.h"
 
 # include "errno.h"
-
-typedef struct s_vec2
-{
-	int	x;
-	int	y;
-}	t_vec2;
 
 typedef struct s_map
 {
@@ -82,7 +76,6 @@ int		is_surrounded_by_walls(t_game *game);
 int		is_playable(t_game *game);
 
 void	key_hook(mlx_key_data_t keydata, void *param);
-// void	update(void *param);
 
 void	move_player(t_game *game, int x, int y);
 int		is_wall(t_game *game, int x, int y);

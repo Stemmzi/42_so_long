@@ -1,4 +1,4 @@
-NAME	= game
+NAME	= so_long
 CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 LIBMLX = ./MLX42
 HEADERS	= -I $(LIBMLX)/include
