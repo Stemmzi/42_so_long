@@ -15,9 +15,8 @@ $(LIBMLXA): $(LIBMLX)
 
 $(LIBMLX):
 	git clone https://github.com/codam-coding-college/MLX42.git
-	cd MLX42
-	cmake -B build 
-	cmake --build build -j4 
+	cmake $(LIBMLX) -B $(LIBMLX)/build
+	cmake --build $(LIBMLX)/build -j4 
 
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(OBJS) $(LIBS) $(HEADERS) $(LIBFT) -g -o $(NAME)
