@@ -1,42 +1,45 @@
-NAME	:= game
-CFLAGS	:= -Wextra -Wall -Werror #-g -fsanitize=address #-Wunreachable-code -Ofast
-LIBMLX	:= ./MLX42
-HEADERS	:= -I ./include -I $(LIBMLX)/include
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+NAME	= game
+CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+LIBMLX = ./MLX42
+HEADERS	= -I $(LIBMLX)/include
+LIBS	= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBMLXA = $(LIBMLX)/build/libmlx42.a
-SRCS	:= main.c map_creator.c image_creator.c key_hook.c free.c map_checker.c game_logic.c
-OBJS	:= ${SRCS:.c=.o}
-TSRCS = test.c
-LIBFT = libft.a
+SRCS = main.c map_creator.c image_creator.c key_hook.c free.c map_checker.c game_logic.c
+OBJS = $(SRCS:.c=.o)
+LIBFT = libft/libft.a
 
 all: $(LIBMLXA) $(NAME)
 
-$(LIBMLXA):
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+$(LIBMLXA): $(LIBMLX)
+	cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+$(LIBMLX):
+	git clone https://github.com/codam-coding-college/MLX42.git
+	cd MLX42
+	cmake -B build 
+	cmake --build build -j4 
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) libft/$(LIBFT) -o $(NAME)
+	$(CC) $(OBJS) $(LIBS) $(HEADERS) $(LIBFT) -g -o $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(LIBFT):
-	@make -C libft
-
-test: libmlx test.o
-	@$(CC) $(CFLAGS) $(LIBS) $(HEADERS) test.o -o $(NAME)
+	make -C libft
 
 norm:
 	norminette $(SRCS)
 
 clean:
-	rm -rf $(OBJS)
-	rm -f test.o
+	rm -f $(OBJS)
 	rm -rf $(LIBMLX)/build
+	make -C libft clean
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
+	make -C libft fclean
 
-re: clean all
+re: fclean all
 
-.PHONY: all, clean, fclean, re, libmlx
+.PHONY: all, norm, clean, fclean, re
