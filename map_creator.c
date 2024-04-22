@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:54:45 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/21 21:28:03 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/22 19:07:32 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,24 @@ void	build_map(t_game *game)
 void	init_map(t_game *game, char *argv[])
 {
 	int	size;
+	int	width;
+	int	height;
 
 	size = TILESIZE * SCALE;
+	width = 0;
+	height = 0;
 	load_map(game, argv);
 	check_map(game);
 	init_imgs(game);
 	build_map(game);
+	mlx_get_monitor_size(0, &width, &height);
+	if (game->map.length * size > width || game->map.height * size > height)
+	{
+		game->my_error = "Map is larger than monitor size\n";
+		clean_exit(game);
+	}
 	mlx_set_window_size(game->mlx, game->map.length * size,
 		game->map.height * size);
+	mlx_set_window_pos(game->mlx, width / 2 - game->map.length * size / 2,
+		height / 2 - game->map.height * size / 2);
 }

@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:54:43 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/22 01:22:29 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/22 19:09:14 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	main(int argc, char *argv[])
 	t_game	game;
 
 	ft_bzero(&game, sizeof(t_game));
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	game.mlx = mlx_init(16, 16, "Your future gamedev!", true);
+	game.mlx = mlx_init(16, 16, "Your future gamedev!", false);
 	if (!game.mlx)
 		ft_mlx_error();
 	if (argc != 2)
