@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:35 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/22 17:51:54 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/22 19:16:31 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	init_map(t_game *game, char *argv[]);
 void	load_map(t_game *game, char **argv);
 void	build_map(t_game *game);
 
-void	load_textures(t_game *game);
 void	init_imgs(t_game *game);
 void	create_img(t_game *game, char *p, mlx_texture_t **t, mlx_image_t **img);
 void	ft_mlx_image_to_window(t_game *game, mlx_image_t *img, int x, int y);
