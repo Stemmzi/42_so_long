@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:56:13 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/23 23:14:15 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/24 01:06:42 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	path_finder(t_game *game)
 	flood_fill(game, game->map.exit_pos.x, game->map.exit_pos.y, 0);
 	if (search_collect_path(game) || check_exit_path(game))
 	{
-		game->my_error = "Exit and/or collectibles are not reachable\n";
+		game->my_error = "Error: Exit and/or collectibles are not reachable\n";
 		clean_exit(game);
 	}
 }

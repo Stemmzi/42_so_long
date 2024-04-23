@@ -6,11 +6,22 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:54:43 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/23 23:26:53 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/24 01:14:24 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	check_success(t_game *game)
+{
+	if (game->player.x != game->map.exit_pos.x
+		|| game->player.y != game->map.exit_pos.y)
+	{
+		ft_printf("Game closed\n");
+		exit (EXIT_FAILURE);
+	}
+	ft_printf("Game Won - Congrats\n");
+}
 
 int	main(int argc, char *argv[])
 {
@@ -32,6 +43,6 @@ int	main(int argc, char *argv[])
 	free_textures(game.textures);
 	free_map(game.map.grid);
 	free_array(&game, game.map.paths);
-	ft_printf("Game Won - Congrats\n");
+	check_success(&game);
 	return (0);
 }

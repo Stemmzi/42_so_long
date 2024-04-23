@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:30 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/23 23:18:14 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/24 01:14:58 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_surrounded_by_walls(t_game *game)
 
 	x = 0;
 	y = 0;
-	game->my_error = "Error: Map is not surrounded by Walls\n";
+	game->my_error = "Error: Map is not surrounded by walls\n";
 	while (y < game->map.height)
 	{
 		if (y == 0 || y == game->map.height)
@@ -76,27 +76,28 @@ static int	has_element(char c)
 	return (0);
 }
 
-int	has_items(t_game *game)
+int	has_items(t_game *g)
 {
 	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
-	game->my_error = "Error: Map is not playable\n";
-	while (y < game->map.height)
+	g->my_error = "Error: Map is not playable\n";
+	while (y < g->map.height)
 	{
-		while (x < game->map.length)
+		x = 0;
+		while (x < g->map.length)
 		{
-			if (game->map.grid[y][x] == 'P')
-				has_element('P');
-			else if (game->map.grid[y][x] == 'E')
-				has_element('E');
-			else if (game->map.grid[y][x] == 'C')
-				has_element('C');
+			if (g->map.grid[y][x] == 'P' || g->map.grid[y][x] == 'E'
+				|| g->map.grid[y][x] == 'C')
+				has_element(g->map.grid[y][x]);
+			else if (g->map.grid[y][x] != '0' && g->map.grid[y][x] != '1')
+			{
+				g->my_error = "Error: Unknown char in map\n";
+				clean_exit(g);
+			}
 			x++;
 		}
-		x = 0;
 		y++;
 	}
 	if (has_element('Y') == 1)
