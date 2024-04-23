@@ -6,22 +6,16 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:54:43 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/23 22:58:08 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/23 23:26:53 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	leak(void)
-{
-	system("leaks so_long");
-}
-
 int	main(int argc, char *argv[])
 {
 	t_game	game;
 
-	atexit(&leak);
 	ft_bzero(&game, sizeof(t_game));
 	game.mlx = mlx_init(16, 16, "Your future gamedev!", false);
 	if (!game.mlx)
