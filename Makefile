@@ -4,7 +4,7 @@ LIBMLX = ./MLX42
 HEADERS	= -I $(LIBMLX)/include
 LIBS	= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBMLXA = $(LIBMLX)/build/libmlx42.a
-SRCS = main.c map_creator.c image_creator.c key_hook.c free.c map_checker.c game_logic.c
+SRCS = main.c map_creator.c image_creator.c key_hook.c free.c map_checker.c game_logic.c path_finder.c path_finder_utils.c
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
 
@@ -29,6 +29,7 @@ $(LIBFT):
 
 norm:
 	norminette $(SRCS)
+	norminette $(NAME).h
 
 clean:
 	rm -f $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 00:22:33 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/21 20:39:28 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/23 22:49:08 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,19 @@ void	collect(t_game *game, int x, int y)
 		game->exit_c->instances[0].enabled = false;
 		ft_mlx_image_to_window(game, game->exit_o,
 			game->exit_c->instances[0].x, game->exit_c->instances[0].y);
+		game->player.moves_to_exit = game->map.paths[y][x];
 	}
 }
 
 void	is_exit(t_game *game)
 {
 	if (game->exit_o->count > 0)
+	{
+		if (game->player.moves_to_exit < -1)
+		{
+			game->my_error = "Game Lost - You didn't took the shortest way\n";
+			clean_exit(game);
+		}
 		mlx_close_window(game->mlx);
+	}
 }

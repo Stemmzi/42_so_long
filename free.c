@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 16:33:53 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/22 01:20:49 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/23 23:12:57 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,17 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	ft_error(void)
+void	free_array(t_game *game, int **map)
 {
-	perror("Error");
-	exit(EXIT_FAILURE);
+	int		count;
+
+	count = 0;
+	while (count < game->map.height)
+	{
+		free(map[count]);
+		count++;
+	}
+	free(map);
 }
 
 void	ft_mlx_error(void)
@@ -64,6 +71,8 @@ void	clean_exit(t_game *game)
 		mlx_terminate(game->mlx);
 	if (game->map.grid)
 		free_map(game->map.grid);
+	if (game->map.paths)
+		free_array(game, game->map.paths);
 	if (game->my_error != NULL)
 		write(STDOUT_FILENO, game->my_error, ft_strlen(game->my_error));
 	else if (mlx_errno != 0)

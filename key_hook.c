@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:40:08 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/21 21:30:13 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/23 22:56:43 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(game->mlx);
+	{
+		game->my_error = "Game closed\n";
+		clean_exit(game);
+	}
 	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS
 			|| keydata.action == MLX_REPEAT))
 		move_player(game, 0, -1);
@@ -46,6 +49,12 @@ void	move_player(t_game *game, int x, int y)
 		game->player.x += x;
 		game->player.moves += 1;
 		ft_printf("%d\n", game->player.moves);
+		if (game->player.moves_to_exit != 0 && game->player.moves > 0)
+		{
+			game->player.moves_to_exit--;
+			if (game->player.moves_to_exit == 0)
+				game->player.moves_to_exit = -1;
+		}
 	}
 	if (game->map.grid[game->player.y][game->player.x] == 'C')
 		collect(game, game->player.x, game->player.y);

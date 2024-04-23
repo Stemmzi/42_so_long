@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:53:30 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/21 19:50:21 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/23 23:18:14 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	is_rectangle(t_game *game)
 {
-	size_t	len;
+	size_t	x;
 	int		y;
 
-	len = game->map.length;
+	x = game->map.length;
 	y = 0;
 	game->my_error = "Error: Map is not rectangular\n";
 	while (y < game->map.height)
 	{
-		if (len != ft_strlen(game->map.grid[y]))
+		if (x != ft_strlen(game->map.grid[y]))
 			return (0);
 		y++;
 	}
@@ -76,7 +76,7 @@ static int	has_element(char c)
 	return (0);
 }
 
-int	is_playable(t_game *game)
+int	has_items(t_game *game)
 {
 	int	x;
 	int	y;
@@ -107,7 +107,8 @@ int	is_playable(t_game *game)
 void	check_map(t_game *game)
 {
 	if ((!is_rectangle(game)) || (!is_surrounded_by_walls(game))
-		|| (!is_playable(game)))
+		|| (!has_items(game)))
 		clean_exit(game);
 	game->my_error = NULL;
+	path_finder(game);
 }

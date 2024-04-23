@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:35 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/22 19:16:31 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/23 23:06:24 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,19 @@
 
 # include "errno.h"
 
+typedef struct s_vec2
+{
+	int	x;
+	int	y;
+}	t_vec2;
+
 typedef struct s_map
 {
 	int		length;
 	int		height;
 	char	**grid;
+	int		**paths;
+	t_vec2	exit_pos;
 }	t_map;
 
 typedef struct s_player
@@ -34,6 +42,7 @@ typedef struct s_player
 	int			y;
 	mlx_image_t	*skin;
 	int			moves;
+	int			moves_to_exit;
 }	t_player;
 
 typedef struct s_textures
@@ -72,7 +81,16 @@ void	ft_mlx_image_to_window(t_game *game, mlx_image_t *img, int x, int y);
 void	check_map(t_game *game);
 int		is_rectangle(t_game *game);
 int		is_surrounded_by_walls(t_game *game);
-int		is_playable(t_game *game);
+int		has_items(t_game *game);
+
+void	path_finder(t_game *game);
+void	flood_fill(t_game *game, int x, int y, int value);
+int		check_exit_path(t_game *game);
+int		search_collect_path(t_game *game);
+
+void	print_array(t_game *game);
+t_vec2	find_exit_pos(t_game *game);
+void	set_path_map_values(t_game *game);
 
 void	key_hook(mlx_key_data_t keydata, void *param);
 
@@ -83,7 +101,8 @@ void	is_exit(t_game *game);
 
 void	clean_exit(t_game *game);
 void	free_map(char **map);
+void	free_array(t_game *game, int **map);
 void	free_textures(t_textures tex);
 void	ft_mlx_error(void);
-void	ft_error(void);
+
 #endif
