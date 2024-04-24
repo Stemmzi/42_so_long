@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:56:13 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/24 01:06:42 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/24 02:02:21 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	flood_fill(t_game *game, int x, int y, int value)
 {
-	if (x > game->map.length - 1 || y > game->map.height - 1)
-		return ;
 	if (game->map.paths[y][x] == -1)
 		return ;
 	if (game->map.paths[y][x] != -1)
@@ -67,7 +65,7 @@ int	check_exit_path(t_game *game)
 
 void	path_finder(t_game *game)
 {
-	game->map.exit_pos = find_exit_pos(game);
+	game->map.exit_pos = get_exit_pos(game);
 	game->map.paths = (int **)malloc(game->map.height * sizeof(int *));
 	set_path_map_values(game);
 	flood_fill(game, game->map.exit_pos.x, game->map.exit_pos.y, 0);

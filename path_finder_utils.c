@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 23:01:19 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/23 23:13:37 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/24 02:03:23 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_array(t_game *game)
 	}
 }
 
-t_vec2	find_exit_pos(t_game *game)
+t_vec2	get_exit_pos(t_game *game)
 {
 	t_vec2	pos;
 	int		x;

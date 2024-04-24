@@ -6,7 +6,7 @@
 /*   By: sgeiger <sgeiger@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:35 by sgeiger           #+#    #+#             */
-/*   Updated: 2024/04/23 23:06:24 by sgeiger          ###   ########.fr       */
+/*   Updated: 2024/04/24 01:49:12 by sgeiger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		check_exit_path(t_game *game);
 int		search_collect_path(t_game *game);
 
 void	print_array(t_game *game);
-t_vec2	find_exit_pos(t_game *game);
+t_vec2	get_exit_pos(t_game *game);
 void	set_path_map_values(t_game *game);
 
 void	key_hook(mlx_key_data_t keydata, void *param);
